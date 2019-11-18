@@ -46,26 +46,29 @@
                 return $CurrentDate;
             }
 
-            protected function GetNote() {          // Gets content of file with the name of the object.
+            /* protected function GetNote() {          // Gets content of file with the name of the object.
 
                 $Note = file_get_contents("Notes/$this->NameOfFile.txt");
                 return $Note;
-            }
+            } */
 
         // Constructors
 
         public function __construct($NameOfFile, $Note) {
 
-            $this->DateOfChange = $this->GetCurrentDate();
             $this->NameOfFile = $NameOfFile;
 
             if(!empty($Note)) {     // If a second Parameter was given, he inserts the value of it to this.Note.
 
                 $this->Note = $Note;
+                $this->DateOfChange = $this->GetCurrentDate();
             }
             else {                  // If it doesn't have a second parameter given with it, we assume the note already exists.
 
-                $this->Note = GetNote();
+                $FileRows = file("Notes/$NameOfFile.txt");
+                array_shift($FileRows);
+                $this->Note = implode($FileRows);
+                $this->DateOfChange = $FileRows[0];
             }
         }
     }

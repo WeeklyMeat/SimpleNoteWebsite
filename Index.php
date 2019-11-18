@@ -24,11 +24,17 @@
         <?php
             require_once 'ClassNote.php';
 
-            if(!empty(!empty($_POST["Title"]) && $_POST["Note"])) {
+            if(!empty($_POST["Title"])) {
 
                 $NewNote = new Note($_POST["Title"], $_POST["Note"]);
-                $NewNote->InsertDataset();
+                
+                
+                if(!empty($_POST["Note"])) {
+
+                    $NewNote->InsertDataset();
+                }
             }
+            var_dump($NewNote);
         ?>
     </body>
 </html>
