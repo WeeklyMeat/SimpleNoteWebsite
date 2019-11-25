@@ -23,11 +23,6 @@
             unlink("Notes/$this->NameOfFile.txt");
         }
 
-        public function GetNote() {  // Returns Note.
-
-            return $this->Note;
-        }
-
         public function ChangeDataset($NewNote) {   // TOOOOOOOOOOODOOOOOOOOOOOOOOOOOOOOOOO
 
             $this->Note = $NewNote;
@@ -36,6 +31,23 @@
             $this->DeleteDataset();
             $this->InsertDataset();
         }
+
+            // Getter
+
+            public function GetNote() {     // Returns Note.
+
+                return $this->Note;
+            }
+
+            public function GetTitle() {    // Returns Title.
+
+                return $this->NameOfFile;
+            }
+
+            public function GetAuthor() {
+
+                return $this->Author;
+            }
 
             // Protected Functions
 
@@ -62,9 +74,9 @@
 
                 $FileRows = file("Notes/$NameOfFile.txt");
                 
-                $this->DateOfChange = array_shift($FileRows);
-                $this->Author = array_shift($FileRows);
-                $this->Note = implode($FileRows);
+                $this->DateOfChange = trim(array_shift($FileRows));
+                $this->Author = trim(array_shift($FileRows));
+                $this->Note = trim(implode($FileRows));
             }
         }
     }
