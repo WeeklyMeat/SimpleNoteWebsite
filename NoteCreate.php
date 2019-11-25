@@ -17,7 +17,12 @@
             
             Titel: <br><input type="text" name="Title" value="" required><br>
             Autor: <br><input type="text" name="Author" value="" required><br>
-            Notiz: <br><textarea name="Note" rows="5" cols="35" required></textarea><br><br>
+            Notiz: <br><textarea name="Note" rows="5" cols="35" required><?php
+                    if(!empty($_POST["NewNote"])) {
+                        $ProvNote = $_POST["NewNote"];
+                        echo "$ProvNote";
+                    }
+                    ?></textarea><br><br>
             <input type="submit">
         </form>
         <?php

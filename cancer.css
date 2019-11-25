@@ -1,0 +1,63 @@
+body {
+
+    height: 100%;
+    margin: 0;
+}
+
+.Content {
+
+    min-height: 100%;
+    margin-bottom: 10%;
+}
+
+.Footer {
+
+    box-shadow: 0px -5px 7px grey;
+
+    background-color: #85C3ED;
+    bottom: 0;
+    min-height: 80px;
+    width: 100%;
+    position: fixed;
+    height: 10%;
+}
+
+.InputNewNote {
+
+    color: whitesmoke;
+    font-size: xx-large;
+
+    width: 40%;
+    height: 100%;
+
+    outline: none;
+    resize: none;
+    overflow: hidden;
+
+    float: left;
+    margin-top: 0.7%;
+    margin-left: 30%;
+
+    background-color: transparent;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 2px solid rgb(62, 102, 129);
+}
+
+.Submit {
+
+    background-color: rgb(62, 102, 129);
+    font-size: large;
+    border: none;
+    color: white;
+    padding: 0.7% 1%;
+    min-width: 88px;
+    min-height: 46px;
+
+    text-align: center;
+    text-decoration: none;
+    
+    float: left;
+    margin-top: 24px;
+}

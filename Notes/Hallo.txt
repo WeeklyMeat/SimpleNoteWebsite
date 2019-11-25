@@ -1,3 +1,3 @@
 25/11/2019
 Joshua
-Ich bin besser als Ismael in PHP.
+Ich bin guter als Ismael in PHP.
