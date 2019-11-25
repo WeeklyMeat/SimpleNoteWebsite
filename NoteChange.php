@@ -25,17 +25,14 @@
         <?php
             require_once 'ClassNote.php';
 
-            if(!empty($_POST["Title"])) {
+            if(!empty($_GET["Title"])) {
 
-                $NewNote = new Note($_POST["Title"], $_POST["Note"], $_POST["Author"]);
-                
-                
-                if(!empty($_POST["Note"]) && !empty($_POST["Author"])) {
+                $NoteToChange = new Note($_GET["Title"], "", "");
 
-                    $NewNote->InsertDataset();
-                }
+                echo "Titel: $NoteToChange->NameOfFile<br>";
+                echo "Autor: $NoteToChange->Author<br>";
+                
             }
-            var_dump($NewNote);
         ?>
     </body>
 </html>

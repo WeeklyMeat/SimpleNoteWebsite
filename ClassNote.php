@@ -5,6 +5,7 @@
         // Member Variables
 
         protected $DateOfChange;
+        protected $Author;
         protected $NameOfFile;
         protected $Note;
 
@@ -13,7 +14,7 @@
         public function InsertDataset() {       // Inserts data of current object into a TXT file.
 
             $NewDataset = fopen("Notes/$this->NameOfFile.txt", "w");
-            fwrite($NewDataset, $this->DateOfChange."\n".$this->Note);
+            fwrite($NewDataset, $this->DateOfChange."\n".$this->Author."\n".$this->Note);
             fclose($NewDataset);
         }
 
@@ -22,10 +23,9 @@
             unlink("Notes/$this->NameOfFile.txt");
         }
 
-        public function OutputNoteToChange() {  // Outputs textarea with old note.
+        public function GetNote() {  // Returns Note.
 
-            $NoteToChange = $this->Note;
-            echo "<textarea>".$NoteToChange."</textarea>";
+            return $this->Note;
         }
 
         public function ChangeDataset($NewNote) {   // TOOOOOOOOOOODOOOOOOOOOOOOOOOOOOOOOOO
@@ -46,29 +46,25 @@
                 return $CurrentDate;
             }
 
-            /* protected function GetNote() {          // Gets content of file with the name of the object.
+        // Constructor
 
-                $Note = file_get_contents("Notes/$this->NameOfFile.txt");
-                return $Note;
-            } */
-
-        // Constructors
-
-        public function __construct($NameOfFile, $Note) {
+        public function __construct($NameOfFile, $Note, $Author) {
 
             $this->NameOfFile = $NameOfFile;
 
             if(!empty($Note)) {     // If a second Parameter was given, he inserts the value of it to this.Note.
 
                 $this->Note = $Note;
+                $this->Author = $Author;
                 $this->DateOfChange = $this->GetCurrentDate();
             }
             else {                  // If it doesn't have a second parameter given with it, we assume the note already exists.
 
                 $FileRows = file("Notes/$NameOfFile.txt");
-                array_shift($FileRows);
+                
+                $this->DateOfChange = array_shift($FileRows);
+                $this->Author = array_shift($FileRows);
                 $this->Note = implode($FileRows);
-                $this->DateOfChange = $FileRows[0];
             }
         }
     }
