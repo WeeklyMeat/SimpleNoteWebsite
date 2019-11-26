@@ -2,6 +2,7 @@ body {
 
     height: 100%;
     margin: 0;
+
 }
 
 .Content {
@@ -60,4 +61,17 @@ body {
     
     float: left;
     margin-top: 24px;
+}
+
+.Content {
+
+    margin: 0;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.Notes {
+
+    width: 30%;
+    min-width: 100px;
 }
