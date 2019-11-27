@@ -68,10 +68,22 @@ body {
     margin: 0;
     margin-left: 10%;
     margin-right: 10%;
+    border: 2px solid rgb(62, 102, 129);
 }
 
-.Notes {
+.Note {
 
-    width: 30%;
+    float: left;
+
+    min-height: 30%;
+    width: 39%;
     min-width: 100px;
+
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+    border: 2px solid rgb(62, 102, 129);
+    border-radius: 5px;
 }

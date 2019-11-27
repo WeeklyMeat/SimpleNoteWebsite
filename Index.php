@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="cancer.css">
-        <title>Main site</title>
+        <title>Happy Notes</title>
     </head>
 
     <!-- Body -->
@@ -33,7 +33,8 @@
         <!-- Actual Content -->
         <div class="Content">
             <!--Notes to Output come here-->
-            <div class="Note">aaa</div>
+            <div class="Note">a</div>
+            <div class="Note">a</div>
         </div>
 
         <!-- Footer -->
