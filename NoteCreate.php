@@ -17,18 +17,20 @@
             <form action="Index.php" method="post">
                 <?php
                     require_once 'ClassNote.php';
+                    session_start();
 
-                    $Title = "";
+                    $Title = "";        // Setting standard values.
                     $Author = "";
                     $Note = "";
+                    $_SESSION["ToDelete"] = false;
 
-                    if(!empty($_GET["NoteToChange"])) {
+                    if(!empty($_GET["NoteToChange"])) {     // Determines what notes has to change.
 
                         $TitleToChange = strtolower(htmlspecialchars(trim($_GET["NoteToChange"])));
                         $NoteToChange = new Note($TitleToChange, "", "");
 
-                        session_start();
-                        $_SESSION["NoteToDelete"] = $NoteToChange;
+                        $_SESSION["NoteToDelete"] = $NoteToChange;      // Gives a copy of the current note to Index.php to delete.
+                        $_SESSION["ToDelete"] = true;
 
                         $Title = $NoteToChange->GetTitle();
                         $Author = $NoteToChange->GetAuthor();
@@ -36,16 +38,16 @@
                     }
                 ?>
                 
-                <br><input class="NoteCreate_Text" type="text" name="Title" value="<?php     // Fills in the title of the Note.
+                <br><input class="NoteCreate_Text" type="text" name="Title" value="<?php     // Fills in the title of the note.
                         echo $Title;
                 ?>" placeholder="Titel" required><br>
 
-                <br><input class="NoteCreate_Text" type="text" name="Author" value="<?php    // Fills in the author of the Note. 
+                <br><input class="NoteCreate_Text" type="text" name="Author" value="<?php    // Fills in the author of the note. 
                         echo $Author;
                 ?>" placeholder="Author" required><br>
 
-                <br><textarea class="NoteCreate_Note" name="NewNote" rows="5" cols="35" placeholder="Ihre Notiz:" required><?php    // Fills in the prepared Note.
-                    if(!empty($_POST["NewNote"])) {
+                <br><textarea class="NoteCreate_Note" name="NewNote" rows="5" cols="35" placeholder="Ihre Notiz:" required><?php    // Fills in the prepared note.
+                    if(!empty($_POST["NewNote"])) {                                 // Note preview dependend on how you get here (edit/create note).
                         $NewNote = htmlspecialchars(trim($_POST["NewNote"]));
                         echo $NewNote;
                     }

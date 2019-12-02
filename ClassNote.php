@@ -29,7 +29,8 @@
 
             echo '<div class="Note">';
             echo "<p>Author: $this->Author</p><br>";
-            echo '<a href="NoteCreate.php?NoteToChange='.$this->NameOfFile.'">Bearbeiten</a>';
+            echo '<a href="NoteCreate.php?NoteToChange='.$this->NameOfFile.'">Bearbeiten</a><br>';
+            echo '<a href="Index.php?NoteToDelete='.$this->NameOfFile.'">Löschen</a>';
             echo '</div>';
         }
 
@@ -71,7 +72,7 @@
                 $this->Author = $Author;
                 $this->DateOfChange = $this->GetCurrentDate();
             }
-            else {                  // If it doesn't have a second parameter given with it, we assume the note already exists.
+            elseif(file_exists("Notes/$NameOfFile.txt")) {                  // If it doesn't have a second parameter given with it, we assume the note already exists.
 
                 $FileRows = file("Notes/$NameOfFile.txt");
                 

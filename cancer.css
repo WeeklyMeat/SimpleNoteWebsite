@@ -94,6 +94,7 @@ body {
 
     border: 2px solid rgb(62, 102, 129);
     border-radius: 5px;
+    box-shadow: 0px 5px 7px rgb(62, 102, 129);
 }
 
 @media only screen and (max-width: 600px) {

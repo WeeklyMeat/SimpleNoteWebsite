@@ -23,15 +23,23 @@
                 $Submitted = $_POST["SubmitPressed"];
             }
 
-            session_start();
-            if(!empty($_SESSION["NoteToDelete"]) && $Submitted) {
+            session_start();                                                                         // Deletes files if needed.
+            if(!empty($_SESSION["NoteToDelete"]) && $Submitted && $_SESSION["ToDelete"]) {           // Deletes old file when a chance happened.
 
                 $NoteToDelete = $_SESSION["NoteToDelete"];
                 $NoteToDelete->DeleteDataset();
             }
+            elseif(!empty($_GET["NoteToDelete"])) {
+
+                $Title = htmlspecialchars(trim($_GET["NoteToDelete"]));     // Deletes file when user wants to.
+                $NoteToDelete = new Note($Title, "", "");
+                if(!empty($NoteToDelete)) {
+                    $NoteToDelete->DeleteDataset();
+                }
+            }
             session_abort();
 
-            if(!empty($_POST["Title"]) && !empty($_POST["Author"]) && !empty($_POST["NewNote"])) {
+            if(!empty($_POST["Title"]) && !empty($_POST["Author"]) && !empty($_POST["NewNote"])) {      // Creates new note.
                 $Title = htmlspecialchars(trim($_POST["Title"]));
                 $Author = htmlspecialchars(trim($_POST["Author"]));
                 $Note = htmlspecialchars(trim($_POST["NewNote"]));
@@ -46,7 +54,7 @@
 
             <!--Notes to Output come here-->
             <?php
-                foreach(glob("Notes\\*.txt") as $Note) {
+                foreach(glob("Notes\\*.txt") as $Note) {        // Outputs every note and gives option to delete or edit it.
 
                     $Title = basename($Note, ".txt");
                     $NoteObject = new Note($Title, "", "");
