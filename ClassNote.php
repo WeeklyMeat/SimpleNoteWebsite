@@ -11,25 +11,32 @@
 
         // Member Functions
 
-        public function InsertDataset() {       // Inserts data of current object into a TXT file.
+        public function InsertDataset() {           // Inserts data of current object into a TXT file.
 
             $NewDataset = fopen("Notes/$this->NameOfFile.txt", "w");
             fwrite($NewDataset, $this->DateOfChange."\n".$this->Author."\n".$this->Note);
             fclose($NewDataset);
         }
 
-        public function DeleteDataset() {       // Deletes the TXT file with the name that was given to the object.
+        public function DeleteDataset() {           // Deletes the TXT file with the name that was given to the object.
 
             unlink("Notes/$this->NameOfFile.txt");
         }
 
-        public function ChangeDataset($NewNote) {   // TOOOOOOOOOOODOOOOOOOOOOOOOOOOOOOOOOO
+        public function ChangeDataset($NewNote) {   // Changes a Dataset.
 
             $this->Note = $NewNote;
             $this->DateOfChange = $this->GetCurrentDate();
 
             $this->DeleteDataset();
             $this->InsertDataset();
+        }
+
+        public function OutputDataset() {           // Outputs a div with the contents of the object.
+
+            echo '<div class="Note">';
+            echo "<p>$this->Author</p>";
+            echo '</div>';
         }
 
             // Getter
@@ -60,7 +67,7 @@
 
         // Constructor
 
-        public function __construct($NameOfFile, $Note, $Author) {
+        public function __construct($NameOfFile, $Author, $Note) {
 
             $this->NameOfFile = $NameOfFile;
 

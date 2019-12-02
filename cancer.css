@@ -2,13 +2,6 @@ body {
 
     height: 100%;
     margin: 0;
-
-}
-
-.Content {
-
-    min-height: 100%;
-    margin-bottom: 10%;
 }
 
 .Footer {
@@ -21,6 +14,16 @@ body {
     width: 100%;
     position: fixed;
     height: 10%;
+
+    color: whitesmoke;
+    text-align: center;
+}
+
+.FooterText {
+
+    color: whitesmoke;
+    text-align: center;
+    font-size: x-large;
 }
 
 .InputNewNote {
@@ -46,6 +49,11 @@ body {
     border-bottom: 2px solid rgb(62, 102, 129);
 }
 
+.InputNewNote::placeholder {
+
+    color: whitesmoke;
+}
+
 .Submit {
 
     background-color: rgb(62, 102, 129);
@@ -68,6 +76,7 @@ body {
     margin: 0;
     margin-left: 10%;
     margin-right: 10%;
+    margin-bottom: 1000px;
     border: 2px solid rgb(62, 102, 129);
 }
 
@@ -75,9 +84,8 @@ body {
 
     float: left;
 
-    min-height: 30%;
+    min-height: 100px;
     width: 39%;
-    min-width: 100px;
 
     margin-left: 5%;
     margin-right: 5%;
@@ -86,4 +94,97 @@ body {
 
     border: 2px solid rgb(62, 102, 129);
     border-radius: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .Note {
+
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+
+    }
+}
+
+.NoteCreate {
+
+    margin: 0;
+}
+
+.NoteCreate_Text {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    margin-top: 2%;
+
+    outline: none;
+    font-size: xx-large;
+    color:  #85C3ED;
+    text-align: center;
+
+    width: 40%;
+    max-width: 300px;
+    height: 100%;
+
+    background-color: transparent;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 2px solid rgb(62, 102, 129);
+}
+
+.NoteCreate_Text::placeholder {
+
+    color: rgb(202, 227, 243);
+}
+
+.NoteCreate_Note {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    margin-top: 2%;
+
+    outline: none;
+    font-size: xx-large;
+    color:  #85C3ED;
+    resize: none;
+
+    width: 70%;
+    max-width: 700px;
+    height: 100%;
+
+    background-color: transparent;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 2px solid rgb(62, 102, 129);
+}
+
+.NoteCreate_Note::placeholder {
+
+    color: rgb(202, 227, 243);
+}
+
+.NoteCreate_Submit {
+
+    background-color: rgb(62, 102, 129);
+    font-size: large;
+    border: none;
+    color: white;
+    padding: 0.7% 1%;
+    min-width: 88px;
+    min-height: 46px;
+
+    text-align: center;
+    text-decoration: none;
+    margin-top: 24px;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

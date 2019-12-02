@@ -18,9 +18,17 @@
         <?php
             require_once 'ClassNote.php';
 
+            if(!empty($_GET["DeleteNote"]) && file_exists("Notes\\".$_GET["DeleteNote"].".txt")) {
+
+                $TitleOfNote = strtolower(htmlspecialchars(trim($_GET["DeleteNote"])));
+
+                $NoteToDelete = new Note($TitleOfNote, "", "");
+                $NoteToDelete->DeleteDataset();
+            }
+
             if(!empty($_POST["ChangedNote"])) {
 
-                $NewNote = trim($_POST["ChangedNote"]);
+                $NewNote = strtolower(htmlspecialchars(trim($_POST["ChangedNote"])));
 
                 session_start();
                 $NoteToChange = $_SESSION["NoteObject"];
@@ -28,13 +36,42 @@
 
                 $NoteToChange->ChangeDataset($NewNote);
             }
+            if(!empty($_POST["NewNote"]) && !empty($_POST["Author"]) && !empty($_POST["Title"])) {
+                
+                $Title = strtolower(htmlspecialchars(trim($_POST["Title"])));
+                $Author = htmlspecialchars(trim($_POST["Author"]));
+                $Note = htmlspecialchars(trim($_POST["NewNote"]));
+
+                $Path = "Notes\\".$Title.".txt";
+                $OriginalTitle = $Title;
+                $Count = 0;
+
+                while(file_exists($Path)) {
+
+                    $Title = $OriginalTitle.$Count;
+                    $Path = "Notes\\".$Title.".txt";
+                    $Count++;
+                }
+
+                $NewNote = new Note($Title, $Author, $Note);
+                $NewNote->InsertDataset();
+            }
         ?>
 
         <!-- Actual Content -->
         <div class="Content">
+
             <!--Notes to Output come here-->
-            <div class="Note">a</div>
-            <div class="Note">a</div>
+            <?php
+
+                foreach(glob("Notes\\*.txt") as $Note) {
+
+                    $Title = basename($Note, ".txt");
+                    $NoteObject = new Note($Title, "", "");
+
+                    $NoteObject->OutputDataset();
+                }
+            ?>
         </div>
 
         <!-- Footer -->
