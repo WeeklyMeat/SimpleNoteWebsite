@@ -73,24 +73,26 @@ body {
 
 .Content {
 
+    padding-bottom: 15%;
+    height: 70%;
     margin: 0;
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: 1000px;
-    border: 2px solid rgb(62, 102, 129);
 }
 
 .Note {
 
+    word-wrap: break-word;
     float: left;
+    position: relative;
 
     min-height: 100px;
-    width: 39%;
+    width: 41%;
 
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 4%;
+    margin-bottom: 4%;
 
     border: 2px solid rgb(62, 102, 129);
     border-radius: 5px;
@@ -118,8 +120,6 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2%;
-    margin-top: 2%;
 
     outline: none;
     font-size: xx-large;
@@ -188,4 +188,28 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.NoteTitle {
+
+    text-align: center;
+    color: rgb(62, 102, 129);
+    text-decoration: underline;
+    font-size: x-large;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.NoteText {
+
+    color: #85C3ED;
+    margin: 0;
+    margin-left: 10px;
+}
+
+.NoteAuthor {
+
+    text-align: center;
+    color: rgb(62, 102, 129);
+    margin: 0;
 }

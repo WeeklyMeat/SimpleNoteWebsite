@@ -28,7 +28,9 @@
         public function OutputDataset() {           // Outputs a div with the contents of the object.
 
             echo '<div class="Note">';
-            echo "<p>Author: $this->Author</p><br>";
+            echo "<p class='NoteTitle'>$this->NameOfFile</p><p class='NoteAuthor'>Verfasst von: $this->Author</p><br>";
+            echo "<p class='NoteText'>$this->Note</p><br>";
+            
             echo '<a href="NoteCreate.php?NoteToChange='.$this->NameOfFile.'">Bearbeiten</a><br>';
             echo '<a href="Index.php?NoteToDelete='.$this->NameOfFile.'">Löschen</a>';
             echo '</div>';
@@ -56,7 +58,7 @@
             protected function GetCurrentDate() {   // Gets current date and returns it in format dd/MM//yyyy.
 
                 $Date = getdate();
-                $CurrentDate = $Date["mday"] . "/" . $Date["mon"] . "/" . $Date["year"];
+                $CurrentDate = $Date["mday"]."/".$Date["mon"]."/".$Date["year"] . " " . $Date["hours"].":".$Date["minutes"];
                 return $CurrentDate;
             }
 
