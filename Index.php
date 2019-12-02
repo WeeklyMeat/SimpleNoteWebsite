@@ -18,46 +18,21 @@
         <?php
             require_once 'ClassNote.php';
 
-            if(!empty($_GET["DeleteNote"]) && file_exists("Notes\\".$_GET["DeleteNote"].".txt")) {
+            session_start();
+            if(!empty($_SESSION["NoteToDelete"])) {
 
-                $TitleOfNote = strtolower(htmlspecialchars(trim($_GET["DeleteNote"])));
-
-                $NoteToDelete = new Note($TitleOfNote, "", "");
+                $NoteToDelete = $_SESSION["NoteToDelete"];
                 $NoteToDelete->DeleteDataset();
             }
+            session_abort();
 
-            if(!empty($_POST["ChangedNote"])) {
-
-                $NewNote = strtolower(htmlspecialchars(trim($_POST["ChangedNote"])));
-
-                session_start();
-                $NoteToChange = $_SESSION["NoteObject"];
-                session_destroy();
-
-                if(file_exists("Notes\\".$NoteToChange->GetTitle().".txt")) {
-                    $NoteToChange->DeleteDataset();
-                }
-                $NoteToChange->ChangeDataset($NewNote);
-            }
-            if(!empty($_POST["NewNote"]) && !empty($_POST["Author"]) && !empty($_POST["Title"])) {
-                
-                $Title = strtolower(htmlspecialchars(trim($_POST["Title"])));
+            if(!empty($_POST["Title"]) && !empty($_POST["Author"]) && !empty($_POST["Note"])) {
+                $Title = htmlspecialchars(trim($_POST["Title"]));
                 $Author = htmlspecialchars(trim($_POST["Author"]));
-                $Note = htmlspecialchars(trim($_POST["NewNote"]));
+                $Note = htmlspecialchars(trim($_POST["Note"]));
 
-                $Path = "Notes\\".$Title.".txt";
-                $OriginalTitle = $Title;
-                $Count = 0;
-
-                while(file_exists($Path)) {
-
-                    $Title = $OriginalTitle.$Count;
-                    $Path = "Notes\\".$Title.".txt";
-                    $Count++;
-                }
-
-                $NewNote = new Note($Title, $Author, $Note);
-                $NewNote->InsertDataset();
+                $NoteObject = new Note($Title, $Author, $Notes);
+                $NoteObject->InsertDataset();
             }
         ?>
 
@@ -66,7 +41,6 @@
 
             <!--Notes to Output come here-->
             <?php
-
                 foreach(glob("Notes\\*.txt") as $Note) {
 
                     $Title = basename($Note, ".txt");
