@@ -36,6 +36,7 @@
 
             echo '<div class="Note">';
             echo "<p>Author: $this->Author</p><br>";
+            echo '<a href="NoteCreate.php?NoteToChange='.$this->NameOfFile.'">Bearbeiten</a>';
             echo '</div>';
         }
 

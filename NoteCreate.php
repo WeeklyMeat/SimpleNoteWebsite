@@ -15,15 +15,56 @@
     <body>
         <div class="NoteCreate">
             <form action="Index.php" method="post">
+                <?php
+                    require_once 'ClassNote.php';
+
+                    if(!empty($_GET["NoteToChange"])) {
+
+                        $TitleToChange = strtolower(htmlspecialchars(trim($_GET["NoteToChange"])));
+                        $NoteToChange = new Note($TitleToChange, "", "");
+                    }
+                ?>
                 
-                <br><input class="NoteCreate_Text" type="text" name="Title" value="" placeholder="Titel" required><br>
-                <br><input class="NoteCreate_Text" type="text" name="Author" value="" placeholder="Author" required><br>
-                <br><textarea class="NoteCreate_Note" name="NewNote" rows="5" cols="35" placeholder="Ihre Notiz:" required><?php
+                <br><input class="NoteCreate_Text" type="text" name="Title" value=<?php     // Fills in the title of the Note.
+                    $Title = "";
+                    if(!empty($NoteToChange)) {
+                        $Title = $NoteToChange->GetTitle();
+                    }
+                    if(!empty($Title)) {
+                        echo '"'.$Title.'"';
+                    }
+                    else {
+                        echo'""';
+                    }
+                ?>placeholder="Titel" required><br>
+
+                <br><input class="NoteCreate_Text" type="text" name="Author" value=<?php    // Fills in the author of the Note.
+                $Author = "";
+                if(!empty($NoteToChange)) {
+                    $Author = $NoteToChange->GetAuthor();
+                }
+                if(!empty($Author)) {
+                    echo '"'.$Author.'"';
+                }
+                else {
+                    echo'""';
+                }
+                ?>placeholder="Author" required><br>
+
+                <br><textarea class="NoteCreate_Note" name="NewNote" rows="5" cols="35" placeholder="Ihre Notiz:" required><?php    // Fills in the prepared Note.
+
                         if(!empty($_POST["NewNote"])) {
                             $ProvNote = $_POST["NewNote"];
                             echo "$ProvNote";
                         }
-                        ?></textarea><br><br>
+                        elseif(!empty($NoteToChange->GetNote())) {
+                            $Note = $NoteToChange->GetNote();
+                            echo "$Note";
+                        }
+                        else {
+                            echo '""';
+                        }
+                    ?></textarea><br><br>
                 <input class="NoteCreate_Submit" type="submit">
             </form>
         </div>

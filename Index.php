@@ -34,6 +34,9 @@
                 $NoteToChange = $_SESSION["NoteObject"];
                 session_destroy();
 
+                if(file_exists("Notes\\".$NoteToChange->GetTitle().".txt")) {
+                    $NoteToChange->DeleteDataset();
+                }
                 $NoteToChange->ChangeDataset($NewNote);
             }
             if(!empty($_POST["NewNote"]) && !empty($_POST["Author"]) && !empty($_POST["Title"])) {
