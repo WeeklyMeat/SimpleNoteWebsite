@@ -20,16 +20,9 @@
 
         public function DeleteDataset() {           // Deletes the TXT file with the name that was given to the object.
 
-            unlink("Notes/$this->NameOfFile.txt");
-        }
-
-        public function ChangeDataset($NewNote) {   // Changes a Dataset.
-
-            $this->Note = $NewNote;
-            $this->DateOfChange = $this->GetCurrentDate();
-
-            $this->DeleteDataset();
-            $this->InsertDataset();
+            if(file_exists("Notes/$this->NameOfFile.txt")) {
+                unlink("Notes/$this->NameOfFile.txt");
+            }
         }
 
         public function OutputDataset() {           // Outputs a div with the contents of the object.
