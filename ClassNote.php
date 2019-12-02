@@ -35,7 +35,7 @@
         public function OutputDataset() {           // Outputs a div with the contents of the object.
 
             echo '<div class="Note">';
-            echo "<p>$this->Author</p>";
+            echo "<p>Author: $this->Author</p><br>";
             echo '</div>';
         }
 
@@ -51,7 +51,7 @@
                 return $this->NameOfFile;
             }
 
-            public function GetAuthor() {
+            public function GetAuthor() {   // Returns Author.
 
                 return $this->Author;
             }
