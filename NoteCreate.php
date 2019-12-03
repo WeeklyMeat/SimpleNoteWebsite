@@ -26,7 +26,7 @@
 
                     if(!empty($_GET["NoteToChange"])) {     // Determines what notes has to change.
 
-                        $TitleToChange = strtolower(htmlspecialchars(trim($_GET["NoteToChange"])));
+                        $TitleToChange = htmlspecialchars(trim($_GET["NoteToChange"]));
                         $NoteToChange = new Note($TitleToChange, "", "");
 
                         $_SESSION["NoteToDelete"] = $NoteToChange;      // Gives a copy of the current note to Index.php to delete.

@@ -63,7 +63,6 @@
                 }
             ?>
         </div>
-        <div class="fuck"></div>
 
         <!-- Footer -->
         <footer class="Footer">
