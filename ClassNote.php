@@ -31,8 +31,8 @@
             echo "<p class='NoteTitle'>$this->NameOfFile</p><p class='NoteAuthor'>Verfasst von: $this->Author</p><br>";
             echo "<p class='NoteText'>$this->Note</p><br>";
             
-            echo '<a href="NoteCreate.php?NoteToChange='.$this->NameOfFile.'">Bearbeiten</a><br>';
-            echo '<a href="Index.php?NoteToDelete='.$this->NameOfFile.'">Löschen</a>';
+            echo '<a class="LinkToEdit" href="NoteCreate.php?NoteToChange='.$this->NameOfFile.'">Bearbeiten</a>';
+            echo '<a class="LinkToDelete" href="Index.php?NoteToDelete='.$this->NameOfFile.'">Löschen</a>';
             echo '</div>';
         }
 

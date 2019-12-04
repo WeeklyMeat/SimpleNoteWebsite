@@ -55,6 +55,8 @@
                         echo $Note;
                     }
                     ?></textarea><br><br>
+
+                <br><input class="UploadData" type="file" name="Image">
                     
                 <input class="NoteCreate_Submit" type="submit" name="SubmitPressed">
             </form>
