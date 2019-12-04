@@ -14,7 +14,8 @@
     <!-- Body -->
     <body>
         <div class="NoteCreate">
-            <form action="Index.php" method="post">
+            <form enctype="multipart/form-data" action="Index.php" method="post">
+                <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                 <?php
                     require_once 'ClassNote.php';
                     session_start();
@@ -56,9 +57,12 @@
                     }
                     ?></textarea><br><br>
 
-                <br><input class="UploadData" type="file" name="Image">
-                    
-                <input class="NoteCreate_Submit" type="submit" name="SubmitPressed">
+                <br><input class="UploadData" type="file" name="Image"><?php
+                    if(file_exists("Pictures\\$Title.jpg")) {
+
+                        echo '<label class="DeleteSwitch"><input type="checkbox" name="DeleteImage" value=true> Bild löschen<label>';
+                    }
+                ?><input class="NoteCreate_Submit" type="submit" name="SubmitPressed">
             </form>
         </div>
     </body>

@@ -20,8 +20,15 @@
 
         public function DeleteDataset() {           // Deletes the TXT file with the name that was given to the object.
 
-            if(file_exists("Notes/$this->NameOfFile.txt")) {
-                unlink("Notes/$this->NameOfFile.txt");
+            if(file_exists("Notes\\$this->NameOfFile.txt")) {
+                unlink("Notes\\$this->NameOfFile.txt");
+            }
+        }
+
+        public function DeletePicture() {
+
+            if(file_exists("Pictures\\$this->NameOfFile.jpg")) {
+                unlink("Pictures\\$this->NameOfFile.jpg");
             }
         }
 
@@ -30,6 +37,10 @@
             echo '<div class="Note">';
             echo "<p class='NoteTitle'>$this->NameOfFile</p><p class='NoteAuthor'>Verfasst von: $this->Author</p><br>";
             echo "<p class='NoteText'>$this->Note</p><br>";
+            if(file_exists("Pictures\\$this->NameOfFile.jpg")) {
+
+                echo "<img src='Pictures\\$this->NameOfFile.jpg'><br><br>";
+            }
             
             echo '<a class="LinkToEdit" href="NoteCreate.php?NoteToChange='.$this->NameOfFile.'">Bearbeiten</a>';
             echo '<a class="LinkToDelete" href="Index.php?NoteToDelete='.$this->NameOfFile.'">Löschen</a>';
