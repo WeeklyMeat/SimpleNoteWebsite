@@ -18,24 +18,29 @@
                 <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                 <?php
                     require_once 'ClassNote.php';
+
                     session_start();
-
-                    $Title = "";        // Setting standard values.
-                    $Author = "";
-                    $Note = "";
-                    $_SESSION["ToDelete"] = false;
-
                     if(!empty($_GET["NoteToChange"])) {     // Determines what notes has to change.
 
                         $TitleToChange = htmlspecialchars(trim($_GET["NoteToChange"]));
-                        $NoteToChange = new Note($TitleToChange, "", "");
+                        $NoteToChange = new Note($TitleToChange, "", "");   // Loads file into object that trepresents the note.
 
-                        $_SESSION["NoteToDelete"] = $NoteToChange;      // Gives a copy of the current note to Index.php to delete.
-                        $_SESSION["ToDelete"] = true;
+                        $_SESSION["OldNote"] = $NoteToChange;      // Gives a copy of the current note to Index.php to delete.
 
                         $Title = $NoteToChange->GetTitle();
                         $Author = $NoteToChange->GetAuthor();
                         $Note = $NoteToChange->GetNote();
+                    }
+                    else {
+
+                        $Title = "";        // Setting standard values.
+                        $Author = "";
+                        $Note = "";
+
+                        if(!empty($_POST["NewNote"])) {
+
+                            $Note = htmlspecialchars(trim($_POST["NewNote"]));
+                        }
                     }
                 ?>
                 
@@ -48,13 +53,7 @@
                 ?>" placeholder="Author" required><br>
 
                 <br><textarea class="NoteCreate_Note" name="NewNote" rows="5" cols="35" placeholder="Ihre Notiz:" required><?php    // Fills in the prepared note.
-                    if(!empty($_POST["NewNote"])) {                                 // Note preview dependend on how you get here (edit/create note).
-                        $NewNote = htmlspecialchars(trim($_POST["NewNote"]));
-                        echo $NewNote;
-                    }
-                    else {
                         echo $Note;
-                    }
                     ?></textarea><br><br>
 
                 <br><input class="UploadData" type="file" name="Image"><?php
