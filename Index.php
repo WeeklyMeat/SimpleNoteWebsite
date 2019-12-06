@@ -20,7 +20,7 @@
 
             $Submitted = false;
             if(!empty($_POST["SubmitPressed"])) {
-                $Submitted = $_POST["SubmitPressed"];
+                $Submitted = $_POST["SubmitPressed"];           // Finds out if user submitted the edited note or not.
             }
 
             session_start();
@@ -72,7 +72,7 @@
                 // Saves given data only if it's one of the following datatypes (pictures).
                 if(strcasecmp($Extension, "jpg") || strcasecmp($Extension, "jpeg") || strcasecmp($Extension, "gif") || strcasecmp($Extension, "png")) {
 
-                    move_uploaded_file($_FILES["Image"]["tmp_name"], "Pictures\\".$NoteObject->getTitle().".jpg");
+                    move_uploaded_file($_FILES["Image"]["tmp_name"], "Pictures\\".$NoteObject->getTitle().".jpg");  // Converts every picture to a jpg to save memory and make handling pictures easier.
                 }
             }
         ?>

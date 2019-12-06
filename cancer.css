@@ -1,120 +1,10 @@
+
+/* Body */
 body {
 
     height: 100%;
     margin: 0;
     padding-top: 4%;
-}
-
-img {
-
-    max-width: 80%;
-    max-height: 80%;
-    object-fit: cover;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-a {
-
-    color: rgb(62, 102, 129);
-    text-decoration: none;
-    font-size: larger;
-    max-width: 200px;
-}
-
-.LinkToEdit:hover {
-
-    color: #85C3ED;
-}
-
-.LinkToEdit {
-
-    float: left;
-    padding-left: 10px;
-}
-
-.LinkToDelete {
-
-    float: right;
-    padding-right: 10px;
-}
-
-.LinkToDelete:hover {
-
-    color: #85C3ED;
-}
-
-.Footer {
-
-    box-shadow: 0px -5px 7px grey;
-
-    background-color: #85C3ED;
-    bottom: 0;
-    min-height: 80px;
-    width: 100%;
-    position: fixed;
-    height: 10%;
-
-    color: whitesmoke;
-    text-align: center;
-}
-
-.FooterText {
-
-    color: whitesmoke;
-    text-align: center;
-    font-size: x-large;
-}
-
-.FooterText:hover {
-
-    text-decoration: underline;
-}
-
-.InputNewNote {
-
-    color: whitesmoke;
-    font-size: xx-large;
-
-    width: 40%;
-    height: 100%;
-
-    outline: none;
-    resize: none;
-    overflow: hidden;
-
-    float: left;
-    margin-top: 0.7%;
-    margin-left: 30%;
-
-    background-color: transparent;
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
-    border-bottom: 2px solid rgb(62, 102, 129);
-}
-
-.InputNewNote::placeholder {
-
-    color: whitesmoke;
-}
-
-.Submit {
-
-    background-color: rgb(62, 102, 129);
-    font-size: large;
-    border: none;
-    color: white;
-    padding: 0.7% 1%;
-    min-width: 88px;
-    min-height: 46px;
-
-    text-align: center;
-    text-decoration: none;
-    
-    float: left;
-    margin-top: 24px;
 }
 
 .Content {
@@ -123,6 +13,7 @@ a {
     margin-right: 10%;
 }
 
+/* Note content */
 .Note {
 
     word-wrap: break-word;
@@ -154,8 +45,46 @@ a {
     }
 }
 
+img {
 
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+.NoteTitle {
+
+    color: rgb(62, 102, 129);
+    font-size: x-large;
+    
+    text-align: center;
+    text-decoration: underline;
+    
+    margin: 0;
+    margin-top: 10px;
+}
+
+.NoteText {
+
+    color: #85C3ED;
+    font-size: larger;
+
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.NoteAuthor {
+
+    color: rgb(62, 102, 129);
+
+    text-align: center;
+    margin: 0;
+}
+
+/* New Note */
 .NoteCreate_Text {
 
     display: block;
@@ -231,35 +160,6 @@ a {
     margin-top: 24px;
 }
 
-.NoteTitle {
-
-    color: rgb(62, 102, 129);
-    font-size: x-large;
-    
-    text-align: center;
-    text-decoration: underline;
-    
-    margin: 0;
-    margin-top: 10px;
-}
-
-.NoteText {
-
-    color: #85C3ED;
-    font-size: larger;
-
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.NoteAuthor {
-
-    color: rgb(62, 102, 129);
-
-    text-align: center;
-    margin: 0;
-}
-
 .UploadData {
 
     color: #85C3ED;
@@ -281,4 +181,108 @@ a {
     margin-top: 24px;
 
     color:  #85C3ED;
+}
+
+/* Link styles */
+a {
+
+    color: rgb(62, 102, 129);
+    text-decoration: none;
+    font-size: larger;
+    max-width: 200px;
+}
+
+.LinkToEdit {
+
+    float: left;
+    padding-left: 10px;
+}
+
+.LinkToEdit:hover {
+
+    color: #85C3ED;
+}
+
+.LinkToDelete {
+
+    float: right;
+    padding-right: 10px;
+}
+
+.LinkToDelete:hover {
+
+    color: #85C3ED;
+}
+
+/* Footer */
+.Footer {
+
+    box-shadow: 0px -5px 7px grey;
+
+    background-color: #85C3ED;
+    bottom: 0;
+    min-height: 80px;
+    width: 100%;
+    position: fixed;
+    height: 10%;
+
+    color: whitesmoke;
+    text-align: center;
+}
+
+.FooterText {
+
+    color: whitesmoke;
+    text-align: center;
+    font-size: x-large;
+}
+
+.FooterText:hover {
+
+    text-decoration: underline;
+}
+
+.InputNewNote {
+
+    color: whitesmoke;
+    font-size: xx-large;
+
+    width: 40%;
+    height: 100%;
+
+    outline: none;
+    resize: none;
+    overflow: hidden;
+
+    float: left;
+    margin-top: 0.7%;
+    margin-left: 30%;
+
+    background-color: transparent;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 2px solid rgb(62, 102, 129);
+}
+
+.InputNewNote::placeholder {
+
+    color: whitesmoke;
+}
+
+.Submit {
+
+    background-color: rgb(62, 102, 129);
+    font-size: large;
+    border: none;
+    color: white;
+    padding: 0.7% 1%;
+    min-width: 88px;
+    min-height: 46px;
+
+    text-align: center;
+    text-decoration: none;
+    
+    float: left;
+    margin-top: 24px;
 }
