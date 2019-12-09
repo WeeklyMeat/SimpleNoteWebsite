@@ -45,34 +45,53 @@
 
             if(!empty($_POST["Title"]) && !empty($_POST["Author"]) && !empty($_POST["NewNote"])) {  // Creates new note, either with edited or completely new data.
 
-                $Title = str_replace("'", "", htmlspecialchars(trim($_POST["Title"])));
-                $Author = htmlspecialchars(trim($_POST["Author"]));
-                $Note = htmlspecialchars(trim($_POST["NewNote"]));
+                if(strlen($_POST["Title"]) <= 80 && strlen($_POST["Author"]) <= 50 && strlen($_POST["NewNote"]) <= 2000) {
 
-                $NoteObject = new Note($Title, $Author, $Note);     // Object that represents note.
-                $NoteObject->InsertDataset();
+                    $Title = str_replace("'", "", htmlspecialchars(trim($_POST["Title"])));
+                    $Author = htmlspecialchars(trim($_POST["Author"]));
+                    $Note = htmlspecialchars(trim($_POST["NewNote"]));
 
-                if(isset($ImageToChange) && file_exists("Pictures\\".$ImageToChange.".jpg")) {      // Renames old picture if a namechange happened.
-                    
-                    rename("Pictures\\".$ImageToChange.".jpg", "Pictures\\".$NoteObject->getTitle().".jpg");
+                    $NoteObject = new Note($Title, $Author, $Note);     // Object that represents note.
+                    $NoteObject->InsertDataset();
+
+                    if(isset($ImageToChange) && file_exists("Pictures\\".$ImageToChange.".jpg")) {      // Renames old picture if a namechange happened.
+                        
+                        rename("Pictures\\".$ImageToChange.".jpg", "Pictures\\".$NoteObject->getTitle().".jpg");
+                    }
+
+                    if(isset($_POST["DeleteImage"])) {  // Deletes image if user decided to in the process of editing it.
+
+                        $OldNote->DeletePicture();
+                    }
                 }
+                else {      // Caught error.
 
-                if(isset($_POST["DeleteImage"])) {  // Deletes image if user decided to in the process of editing it.
-
-                    $OldNote->DeletePicture();
+                    echo '<p class="ErrorMessage">Die Notiz wurde nicht erstellt. Sie muss folgenden kriterien entsprechen:<br>Titel weniger als 80 Zeichen<br>Autor weniger als 50 Zeichen<br>Notiz weniger als 2000 Zeichen</p>';
                 }
             }
 
-            if(isset($_FILES["Image"])){        // Saves a given picture or overwrites old one with it.
+            if(isset($_FILES["Image"]["tmp_name"])) {   // Saves a given picture or overwrites old one with it.
+                if(is_uploaded_file($_FILES["Image"]["tmp_name"])) {
+                    if($_FILES["Image"]["size"] < 512000) {
 
-                $TempName = $_FILES["Image"]["name"];   // Next three lines get the extension of a file.
-                $FileArray = explode(".", $TempName);
-                $Extension = end($FileArray);
+                        $TempName = $_FILES["Image"]["name"];   // Next three lines get the extension of a file.
+                        $FileArray = explode(".", $TempName);
+                        $Extension = end($FileArray);
 
-                // Saves given data only if it's one of the following datatypes (pictures).
-                if(strcasecmp($Extension, "jpg") || strcasecmp($Extension, "jpeg") || strcasecmp($Extension, "gif") || strcasecmp($Extension, "png")) {
+                        // Saves given data only if it's one of the following datatypes (pictures).
+                        if($Extension === "jpg" || $Extension === "jpeg" || $Extension === "png" || $Extension === "gif") {
 
-                    move_uploaded_file($_FILES["Image"]["tmp_name"], "Pictures\\".$NoteObject->getTitle().".jpg");  // Converts every picture to a jpg to save memory and make handling pictures easier.
+                            move_uploaded_file($_FILES["Image"]["tmp_name"], "Pictures\\".$NoteObject->getTitle().".jpg");  // Converts every picture to a jpg to save memory and make handling pictures easier.
+                        }
+                        else {
+
+                            echo '<p class="ErrorMessage">Die dazugehörende Datei konnte nicht hochgeladen werden.<br>Nur folgende Formate werden akzeptiert: jpg, jpeg, png, gif.<br>Die Notiz wurde daher ohne Bild erstellt.</p>';
+                        }
+                    }
+                    else {
+
+                        echo '<p class="ErrorMessage">Die dazugehörende Datei konnte nicht hochgeladen werden.<br>Die grösse von 500kb dürfen nicht überschritten werden.</p>';
+                    }
                 }
             }
         ?>

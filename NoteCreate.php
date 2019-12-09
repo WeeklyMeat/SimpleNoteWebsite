@@ -15,7 +15,7 @@
     <body>
         <div class="NoteCreate">
             <form enctype="multipart/form-data" action="Index.php" method="post">
-                <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
                 <?php
                     require_once 'ClassNote.php';
 
@@ -46,13 +46,13 @@
                 
                 <br><input class="NoteCreate_Text" type="text" name="Title" value="<?php     // Fills in the title of the note.
                         echo $Title;
-                ?>" placeholder="Titel" required><br>
+                ?>" placeholder="Titel" maxlength="80" required><br>
 
                 <br><input class="NoteCreate_Text" type="text" name="Author" value="<?php    // Fills in the author of the note. 
                         echo $Author;
-                ?>" placeholder="Author" required><br>
+                ?>" placeholder="Autor" maxlength="50" required><br>
 
-                <br><textarea class="NoteCreate_Note" name="NewNote" rows="5" cols="35" placeholder="Ihre Notiz:" required><?php    // Fills in the prepared note.
+                <br><textarea class="NoteCreate_Note" name="NewNote" rows="5" cols="35" placeholder="Ihre Notiz:" maxlength="2000" required><?php    // Fills in the prepared note.
                         echo $Note;
                     ?></textarea><br><br>
 

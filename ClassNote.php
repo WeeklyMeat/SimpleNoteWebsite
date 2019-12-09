@@ -69,7 +69,12 @@
             protected function GetCurrentDate() {   // Gets current date and returns it in format dd/MM//yyyy hh:mm.
 
                 $Date = getdate();
-                $CurrentDate = $Date["mday"]."/".$Date["mon"]."/".$Date["year"] . " " . $Date["hours"].":".$Date["minutes"];
+                $CurrentDate = $Date["mday"]."/".$Date["mon"]."/".$Date["year"] . " " . $Date["hours"] . ":";
+                if($Date["minutes"] < 10) {
+
+                    $CurrentDate .= "0";
+                }
+                $CurrentDate .= $Date["minutes"];
                 return $CurrentDate;
             }
 
