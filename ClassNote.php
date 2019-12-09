@@ -5,9 +5,10 @@
         // Member Variables
 
         protected $DateOfChange;
-        protected $Author;
         protected $NameOfFile;
+        protected $Author;
         protected $Note;
+        protected $IsNewFile;   // Boolean to test if note already exists.
 
         // Member Functions
 
@@ -64,6 +65,11 @@
                 return $this->Author;
             }
 
+            public function GetIsNewFile() {
+
+                return $this->IsNewFile;
+            }
+
             // Protected Functions
 
             protected function GetCurrentDate() {   // Gets current date and returns it in format dd/MM//yyyy hh:mm.
@@ -84,11 +90,12 @@
 
             $this->NameOfFile = $NameOfFile;
 
-            if(!empty($Note)) {     // If a second Parameter was given, he inserts the value of it to this->Note.
+            if(!empty($Author)) {     // If a second Parameter was given, he inserts the value of it to this->Note.
 
                 $this->Note = $Note;
                 $this->Author = $Author;
                 $this->DateOfChange = $this->GetCurrentDate();
+                $this->IsNewFile = true;
             }
             elseif(file_exists("Notes/$NameOfFile.txt")) {      // If it doesn't have a second parameter given with it, we assume the note already exists.
 
@@ -97,6 +104,7 @@
                 $this->DateOfChange = trim(array_shift($FileRows));
                 $this->Author = trim(array_shift($FileRows));
                 $this->Note = trim(implode($FileRows));
+                $this->IsNewFile = false;
             }
         }
     }

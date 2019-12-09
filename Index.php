@@ -24,13 +24,15 @@
             }
 
             session_start();
+            $IsNewFile = false;
             if(!empty($_SESSION["OldNote"]) && $Submitted) {    // If user has submitted a change, it deletes the old file. Keeps the picture.
 
                 $OldNote = $_SESSION["OldNote"];                // Object that gets deleted because it got edited.
                 $OldNote->DeleteDataset();
-                $ImageToChange = $OldNote->getTitle();
+                $ImageToChange = $OldNote->GetTitle();
+                $IsNewFile = $OldNote->GetIsNewFile();
             }
-            elseif(!empty($_GET["NoteToDelete"])) {
+            elseif(isset($_GET["NoteToDelete"])) {  // can't use !empty() because if the title is "0" it reads it as empty, not jumping into the code.
 
                 $Title = htmlspecialchars(trim($_GET["NoteToDelete"]));     // Deletes file when user wants to. Deletes also picture.
                 $NoteToDelete = new Note($Title, "", "");       // Object that represents the note that gets deleted.
@@ -49,12 +51,17 @@
 
                     $Loop = 0;
                     $OriginalTitle = $Title;
-                    while(empty($_SESSION["OldNote"]) && file_exists("Notes\\$Title.txt")) {   // Checks if txt file already exists. If so, it changes the name of the new file.
+                    while((empty($_SESSION["OldNote"]) && file_exists("Notes\\$Title.txt")) || (!$IsNewFile && file_exists("Notes\\$Title.txt"))) {   // Checks if txt file already exists. If so, it changes the name of the new file.
 
                         $Title = $OriginalTitle . $Loop;
                         $Loop++;
                     }
                     $Author = htmlspecialchars(trim($_POST["Author"]));
+                    if(empty($Author)) {
+
+                        $Author = "Unbekannter Autor";
+                    }
+
                     $Note = htmlspecialchars(trim($_POST["NewNote"]));
 
                     $NoteObject = new Note($Title, $Author, $Note);     // Object that represents note.
@@ -70,7 +77,7 @@
                         $OldNote->DeletePicture();
                     }
                 }
-                else {      // Caught error.
+                else {      // Catches error.
 
                     echo '<p class="ErrorMessage">Die Notiz wurde nicht erstellt. Sie muss folgenden kriterien entsprechen:<br>Titel weniger als 80 Zeichen<br>Autor weniger als 50 Zeichen<br>Notiz weniger als 2000 Zeichen</p>';
                 }
