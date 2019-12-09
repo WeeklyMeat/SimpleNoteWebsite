@@ -41,13 +41,19 @@
                 }
                 $ImageToChange = "";
             }
-            session_abort();
 
             if(!empty($_POST["Title"]) && !empty($_POST["Author"]) && !empty($_POST["NewNote"])) {  // Creates new note, either with edited or completely new data.
-
-                if(strlen($_POST["Title"]) <= 80 && strlen($_POST["Author"]) <= 50 && strlen($_POST["NewNote"]) <= 2000) {
+                if(strlen($_POST["Title"]) <= 80 && strlen($_POST["Author"]) <= 50 && strlen($_POST["NewNote"]) <= 2000) {  // Only if data fits criteria.
 
                     $Title = str_replace("'", "", htmlspecialchars(trim($_POST["Title"])));
+
+                    $Loop = 0;
+                    $OriginalTitle = $Title;
+                    while(empty($_SESSION["OldNote"]) && file_exists("Notes\\$Title.txt")) {   // Checks if txt file already exists. If so, it changes the name of the new file.
+
+                        $Title = $OriginalTitle . $Loop;
+                        $Loop++;
+                    }
                     $Author = htmlspecialchars(trim($_POST["Author"]));
                     $Note = htmlspecialchars(trim($_POST["NewNote"]));
 
@@ -108,6 +114,9 @@
 
                     $NoteObject->OutputDataset();
                 }
+                session_unset();    // Session gets closed and deleted together with the cookie to preven bugs.
+                session_destroy();
+                session_write_close();
             ?>
         </div>
 
